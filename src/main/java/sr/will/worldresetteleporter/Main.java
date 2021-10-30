@@ -114,7 +114,7 @@ public class Main {
 
         // Spawn dimension
         arguments.spawnDimension = getIntOption(cmd.getOptionValue("spawnDim", "0"), "spawnDim");
-        
+
         arguments.dryRun = cmd.hasOption("dryRun");
 
         // Dimension warning
