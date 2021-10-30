@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "idea"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+group 'sr.will'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven { url "https://jitpack.io/" }
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.32'
+    implementation "log4j:log4j:1.2.17"
+
+    implementation "com.github.Querz:NBT:6.1"
+    implementation "commons-io:commons-io:2.7"
+    implementation "commons-cli:commons-cli:1.5.0"
+}
+
+shadowJar {
+    manifest {
+        attributes "Main-Class": "sr.will.worldresetteleporter.Main"
+    }
+
+    archiveClassifier.set("")
+}
+
+build {
+    dependsOn clean
+    dependsOn jar
+    dependsOn shadowJar
+
+    jar.mustRunAfter clean
+    shadowJar.mustRunAfter jar
+}
